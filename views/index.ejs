@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="shoppingCart">
+<html ng-app="teaShop">
 <head>
   <meta charset="utf-8">
   <title>BUY OUR TEA!</title>
@@ -8,13 +8,8 @@
   <link rel="stylesheet" href="/stylesheets/styles.css" />
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-route.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-route.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
-  <script src="/js/app.js"></script>
-  <script src="/js/controllers.js"></script>
-  <script src="/js/factories.js"></script>
-  <script src="/js/directives.js"></script>
-  <script src="/js/filters.js"></script>
 </head>
 <body>
   <header>
@@ -27,6 +22,13 @@
     <h1>THIS IS THE BEST TEA SHOP!</h1>
   </div>
   <div class="container" ng-view></div>
+
+  <!-- modules -->
+  <script src="js/angular/app.module.js"></script>
+  <script src="js/angular/shop/controllers.js"></script>
+  <script src="js/angular/shop/factories.js"></script>
+  <script src="js/angular/shop/directives.js"></script>
+  <script src="js/angular/shop/filters.js"></script>
 
 </body>
 </html>

@@ -1,3 +1,14 @@
+(function() {
+  'use strict';
+
+  angular.module
+});
+
+
+
+
+
+
 var app = angular.module('shoppingCart', ['ngRoute']);
 app.config(['$routeProvider', function($routeProvider) {
   $routeProvider
