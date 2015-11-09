@@ -1,3 +1,48 @@
+(function() {
+  'use strict';
+
+  angular.module('teaShop.shop')
+    .controller('ShopController', ShopController);
+
+  ShopController.$inject = ['$location'];
+
+  function ShopController($location) {
+    var vm = this;
+    vm.shoppingBag = JSON.parse(localStorage.getItem('shoppingBag')) || [];
+    vm.alphabetical = '+name';
+    vm.addToBag = addToBag;
+
+
+    function addToBag(tea, quantity) {
+      var shoppingBagStorage;
+      var itemFound = false;
+
+      quantity = parseInt(quantity);
+      tea.subtotal = quantity * tea.price;
+
+      //look for item in shopping bag
+      vm.shoppingBag.forEach(function(item) {
+        if (item._id === tea._id) {
+          item.quantity = quantity;
+          itemFound = true;
+        }
+      });
+
+      //if item is not in shopping bag
+      if (!itemFound) {
+        vm.shoppingBag.push(tea);
+      }
+      shoppingBagStorage = JSON.stringify(vm.shoppingBag);
+      localStorage.setItem('shoppingBag', shoppingBagStorage);
+    }
+  }
+
+
+})();
+
+
+
+
 app.controller('ShopController', ['$scope', '$location', 'ShopInventory', function($scope, $location, ShopInventory) {
   function makeCategoryArray(dataArr) {
     var categories = dataArr.map(function(tea) {
@@ -10,40 +55,44 @@ app.controller('ShopController', ['$scope', '$location', 'ShopInventory', functi
     categories = _.uniq(categories);
     return categories;
   }
-  $scope.shoppingBag = JSON.parse(localStorage.getItem('shoppingBag')) || [];
+  // $scope.shoppingBag = JSON.parse(localStorage.getItem('shoppingBag')) || [];
   ShopInventory.getInventory().then(function(data) {
     console.log(data.data);
     $scope.teas = data.data;
     $scope.categories = makeCategoryArray(data.data);
   });
-  $scope.alphabetical = '+name';
-  $scope.addToBag = function(tea, quantity) {
-    var shoppingBagStorage;
-    var itemFound = false;
+  // $scope.alphabetical = '+name';
+  // $scope.addToBag = function(tea, quantity) {
+  //   var shoppingBagStorage;
+  //   var itemFound = false;
 
-    quantity = parseInt(quantity);
-    tea.subtotal = quantity * tea.price;
+  //   quantity = parseInt(quantity);
+  //   tea.subtotal = quantity * tea.price;
 
-    //look for item in shopping bag
-    $scope.shoppingBag.forEach(function(item) {
-      if (item._id === tea._id) {
-        item.quantity = quantity;
-        itemFound = true;
-      }
-    });
+  //   //look for item in shopping bag
+  //   $scope.shoppingBag.forEach(function(item) {
+  //     if (item._id === tea._id) {
+  //       item.quantity = quantity;
+  //       itemFound = true;
+  //     }
+  //   });
 
-    //if item is not in shopping bag
-    if (!itemFound) {
-      tea.quantity = quantity;
-      $scope.shoppingBag.push(tea);
-    }
-    shoppingBagStorage = JSON.stringify($scope.shoppingBag);
-    localStorage.setItem('shoppingBag', shoppingBagStorage);
-  };
-  $scope.checkout = function() {
-    $location.path('/shopping-bag');
-  }
+  //   //if item is not in shopping bag
+  //   if (!itemFound) {
+  //     tea.quantity = quantity;
+  //     $scope.shoppingBag.push(tea);
+  //   }
+  //   shoppingBagStorage = JSON.stringify($scope.shoppingBag);
+  //   localStorage.setItem('shoppingBag', shoppingBagStorage);
+  // };
+  // $scope.checkout = function() {
+  //   $location.path('/shopping-bag');
+  // }
 }]);
+
+
+
+
 
 app.controller('ShoppingBagController', ['$scope', function($scope) {
   function updateStorage() {
