@@ -1,0 +1,12 @@
+<ul>
+  <li>Price: {{tea.price | decimal | currency }}</li>
+  <li>Caffeine Scale: {{tea.caffeineScale}}</li>
+  <li>Ingredients: {{tea.ingredients}}</li>
+  <li>Rating: {{tea.rating}}</li>
+  <li>In Stock? {{tea.inStock | stockStatus}}</li>
+  <li>Categories:
+    <ul>
+      <li ng-repeat="category in tea.categories">{{category}}</li>
+    </ul>
+  </li>
+</ul>

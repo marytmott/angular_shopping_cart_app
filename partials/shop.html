@@ -1,0 +1,71 @@
+<!-- top row -->
+<div class="row">
+  <div class="col-md-6">
+    <label>Search By Category:
+      <select ng-model="categorySearch">
+        <option ng-repeat="category in categories" value="{{category}}" multiple >{{category}}</option>
+      </select>
+    </label>
+    <label>Search By Name:
+      <input type="text" ng-model="nameSearch" />
+    </label>
+  </div>
+  <div class="col-md-6">
+    <button class="btn btn-info" ng-show="!shoppingBag.length">Checkout | Bag: Empty! </button>
+    <button class="btn btn-info" ng-show="shoppingBag.length" ng-click="checkout()">Checkout | Bag: ({{shoppingBag.length}})</button>
+  </div>
+</div>
+<!-- div "table" -->
+<div class="row tea-box">
+  <div class="col-md-4">
+    <p>Tea</p>
+  </div>
+  <div class="col-md-4">
+    <p>Information</p>
+  </div>
+  <div class="col-md-4">
+    <span>Sort By Price:</span>
+    <span>
+      <select ng-model="price">
+        <option value="+price">Lowest</option>
+        <option value="-price">Highest</option>
+      </select>
+    </span>
+  </div>
+</div>
+<div class="row" ng-repeat="tea in teas | orderBy: alphabetical | orderBy: price | filter: nameSearch | filter: categorySearch">
+  <div class="container">
+    <div class="row tea-box">
+      <div class="col-md-4">
+        <img ng-src="{{tea.imageUrl}}" />
+      </div>
+      <div  class="col-md-8">
+        <div class="row">
+          <div class="col-md-6">
+            <h2>{{tea.name}}</h2>
+          </div>
+          <div class="col-md-3">
+            <h2>Quantity:</h2>
+            <label>
+              <select ng-model="quantity" ng-init="quantity=1">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select>
+            </label>
+            <button class="btn btn-success" ng-click="addToBag(tea, quantity)">Add To Bag</button>
+          </div>
+        </div>
+        <div ts-tea-details tea-data="tea">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
