@@ -28,6 +28,48 @@ apiRouter.route('/teas')
   });
 });
 
+//should be devloped out for cart ids
+apiRouter.route('/shopping-cart')
+.get(function(req, res) {
+  db.ShoppingCart.findOne({}, function(error, cart) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log(cart);
+      res.json(cart);
+    }
+  });
+})
+.post(function(req, res) {
+  console.log(req.body);
+  db.ShoppingCart.create(req.body, function(error, cart) {
+    if (error) {
+      // res.json({error: error});
+    } else {
+      console.log(cart);
+      res.json(cart);
+    }
+  });
+})
+.put(function(req, res) {
+  // console.log(req.body);
+  db.ShoppingCart.findOne({}, function(error, cart) {
+    if (error) {
+      console.log(error);
+    } else {
+      cart.items = req.body;
+      cart.save(function(error, cart) {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log(cart);
+          res.json(cart);
+        }
+      });
+    }
+  });
+});
+
 
 //additional crud operations --->
 // .post(function(req, res) {

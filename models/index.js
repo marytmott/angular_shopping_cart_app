@@ -9,3 +9,4 @@ db.once('open', function() {
 mongoose.set('debug', true);
 
 module.exports.Tea = require('./tea');
+module.exports.ShoppingCart = require('./shoppingCart');

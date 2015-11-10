@@ -3,7 +3,7 @@
   <div class="col-md-6">
     <label>Search By Category:
       <select ng-model="categorySearch">
-        <option ng-repeat="category in categories" value="{{category}}" multiple >{{category}}</option>
+        <option ng-repeat="category in vm.categories" value="{{category}}" multiple >{{category}}</option>
       </select>
     </label>
     <label>Search By Name:
@@ -11,8 +11,8 @@
     </label>
   </div>
   <div class="col-md-6">
-    <button class="btn btn-info" ng-show="!shoppingBag.length">Checkout | Bag: Empty! </button>
-    <button class="btn btn-info" ng-show="shoppingBag.length" ng-click="checkout()">Checkout | Bag: ({{shoppingBag.length}})</button>
+    <button class="btn btn-info" ng-show="!vm.shoppingBagLength">Checkout | Bag: Empty! </button>
+    <button class="btn btn-info" ng-show="vm.shoppingBagLength" ng-click="vm.checkout()">Checkout | Bag: ({{vm.shoppingBagLength}})</button>
   </div>
 </div>
 <!-- div "table" -->
@@ -33,7 +33,7 @@
     </span>
   </div>
 </div>
-<div class="row" ng-repeat="tea in teas | orderBy: alphabetical | orderBy: price | filter: nameSearch | filter: categorySearch">
+<div class="row" ng-repeat="tea in vm.teas | orderBy: vm.alphabetical | orderBy: price | filter: nameSearch | filter: categorySearch">
   <div class="container">
     <div class="row tea-box">
       <div class="col-md-4">
@@ -47,7 +47,7 @@
           <div class="col-md-3">
             <h2>Quantity:</h2>
             <label>
-              <select ng-model="quantity" ng-init="quantity=1">
+              <select ng-model="quantity" ng-init="quantity='1'">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -60,7 +60,7 @@
                 <option value="10">10</option>
               </select>
             </label>
-            <button class="btn btn-success" ng-click="addToBag(tea, quantity)">Add To Bag</button>
+            <button class="btn btn-success" ng-click="vm.addToBag(tea, quantity)">Add To Bag</button>
           </div>
         </div>
         <div ts-tea-details tea-data="tea">
